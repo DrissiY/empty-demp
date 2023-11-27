@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.js",
-  "/": "pages/index.js",
-  "/blogs/blog_left_sidebar": "pages/blogs/blog_left_sidebar.js",
-  "/portfolio/product-box": "pages/portfolio/product-box.js"
+  "/": "pages/index.js"
 }
