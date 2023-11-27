@@ -17,7 +17,7 @@ const Data = [
   {
     link: svgservice,
     title: "24 X 7 service",
-    service: "online service for 24 x 7",
+    service: "online service for 24 x 77",
   },
   {
     link: svgoffer,

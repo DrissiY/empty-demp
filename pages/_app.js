@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ThemeSettings from "../components/customizer/theme-settings";
+
 import "../public/assets/scss/app.scss";
 import { ToastContainer } from "react-toastify";
 import TapTop from "../components/common/widgets/Tap-Top";
@@ -7,7 +7,7 @@ import TapTop from "../components/common/widgets/Tap-Top";
 import CartContextProvider from "../helpers/cart/CartContext";
 import { WishlistContextProvider } from "../helpers/wishlist/WishlistContext";
 import FilterProvider from "../helpers/filter/FilterProvider";
-import SettingProvider from "../helpers/theme-setting/SettingProvider";
+
 import { CompareContextProvider } from "../helpers/Compare/CompareContext";
 import { CurrencyContextProvider } from "../helpers/Currency/CurrencyContext";
 import Helmet from "react-helmet";
@@ -22,7 +22,7 @@ export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const path = window.location.pathname.split("/");
     const url = path[path.length - 1];
-    document.body.classList.add("dark");
+  
 
     let timer = setTimeout(function () {
       setIsLoading(false);
@@ -51,7 +51,7 @@ export default function MyApp({ Component, pageProps }) {
               <title>Multikart - Multi-purpopse E-commerce React Template</title>
             </Helmet>
             <div>
-              <SettingProvider>
+           
                 <CompareContextProvider>
                   <CurrencyContextProvider>
                     <CartContextProvider>
@@ -62,9 +62,9 @@ export default function MyApp({ Component, pageProps }) {
                       </WishlistContextProvider>
                     </CartContextProvider>
                   </CurrencyContextProvider>
-                  <ThemeSettings />
+                
                 </CompareContextProvider>
-              </SettingProvider>
+         
               <ToastContainer />
               <TapTop />
             </div>

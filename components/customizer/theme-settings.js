@@ -28,9 +28,7 @@ const ThemeSettings = () => {
 
   console.log("rtl", layoutState);
 
-  /*=====================
-     Tap on Top
-     ==========================*/
+
   useEffect(() => {
     if (config.config.layout_version && config.config.layout_type) {
       const bodyClass = document.body.classList;
@@ -523,3 +521,5 @@ const ThemeSettings = () => {
 };
 
 export default ThemeSettings;
+
+{/* Your Code */}
