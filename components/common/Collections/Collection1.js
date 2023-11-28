@@ -9,6 +9,7 @@ import { Row, Col, Container } from 'reactstrap';
 import CartContext from '../../../helpers/cart';
 import { WishlistContext } from '../../../helpers/wishlist/WishlistContext';
 import { CompareContext } from '../../../helpers/Compare/CompareContext';
+import shopifyFetch from "../../../Api"
 
 const GET_PRODUCTS = gql`
     query  products($type:_CategoryType!,$indexFrom:Int! ,$limit:Int!) {
@@ -43,19 +44,57 @@ const GET_PRODUCTS = gql`
     }
 `;
 
+const RECOMMENDED_PRODUCTS_QUERY = `#graphql
+fragment RecommendedProduct on Product {
+  id
+  title
+  handle
+  priceRange {
+    minVariantPrice {
+      amount
+      currencyCode
+    }
+  }
+  images(first: 1) {
+    nodes {
+      id
+      url
+      altText
+      width
+      height
+    }
+  }
+}
+query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+  products(first: 10, sortKey: UPDATED_AT, reverse: true) {
+    nodes {
+      ...RecommendedProduct
+    }
+  }
+}
+`;
+
 const TopCollection = ({ type, title, subtitle, designClass, line, noSlider, cartClass, productDetail, noTitle, titleClass, innerTitle }) => {
     const context = useContext(CartContext)
     const contextWishlist = useContext(WishlistContext);
     const contextCompare = useContext(CompareContext);
     const quantity = context.quantity;
 
-    var { loading, data } = useQuery(GET_PRODUCTS, {
+
+    var { loading, data } = shopifyFetch(RECOMMENDED_PRODUCTS_QUERY, {
         variables: {
             type: type,
             indexFrom: 0,
             limit: 8
         }
-    });
+        
+
+      
+    }
+    );
+
+
 
     return (
         <>
@@ -150,3 +189,4 @@ const TopCollection = ({ type, title, subtitle, designClass, line, noSlider, car
 
 
 export default TopCollection;
+

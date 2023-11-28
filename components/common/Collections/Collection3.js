@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
-import { useQuery } from "@apollo/client";
+
 import { gql } from "@apollo/client";
 import ProductItems from "../product-box/ProductBox1";
 import { Row, Col, Container, Media } from "reactstrap";
@@ -9,6 +9,10 @@ import { WishlistContext } from "../../../helpers/wishlist/WishlistContext";
 import PostLoader from "../PostLoader";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
 import search from "../../../public/assets/images/empty-search.jpg";
+import {shopifyFetch} from "../../../Api";
+import { RECOMMENDED_PRODUCTS_QUERY } from "../../../queries";
+
+
 
 const GET_PRODUCTS = gql`
   query products($type: _CategoryType!, $indexFrom: Int!, $limit: Int!) {
@@ -43,6 +47,8 @@ const GET_PRODUCTS = gql`
   }
 `;
 
+
+
 const TopCollection = ({ type, title, subtitle, designClass, noSlider, cartClass, productSlider, titleClass, noTitle, innerClass, inner, backImage }) => {
   const context = useContext(CartContext);
   const contextWishlist = useContext(WishlistContext);
@@ -50,7 +56,7 @@ const TopCollection = ({ type, title, subtitle, designClass, noSlider, cartClass
   const quantity = context.quantity;
   const [delayProduct, setDelayProduct] = useState(true);
 
-  var { loading, data } = useQuery(GET_PRODUCTS, {
+  var { loading, data } = shopifyFetch(RECOMMENDED_PRODUCTS_QUERY, {
     variables: {
       type: type,
       indexFrom: 0,
@@ -166,5 +172,6 @@ const TopCollection = ({ type, title, subtitle, designClass, noSlider, cartClass
     </>
   );
 };
+
 
 export default TopCollection;

@@ -31,21 +31,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/page/account/checkout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/page/account/checkout.js"
-    ],
-    "/page/account/wishlist": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/page/account/wishlist.js"
-    ],
-    "/shop/left_sidebar": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/shop/left_sidebar.js"
     ]
   },
   "ampFirstPages": []
