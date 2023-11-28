@@ -48,9 +48,13 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-let data  = await Getcollections();
+var data ;
+  async function Get(){
 
-  console.log(data);
+   data  = await Getcollections();
+
+    console.log(data);
+  }
 
 
 const TopCollection =  ({ type, title, subtitle, designClass, noSlider, cartClass, productSlider, titleClass, noTitle, innerClass, inner, backImage }) => {
@@ -60,7 +64,7 @@ const TopCollection =  ({ type, title, subtitle, designClass, noSlider, cartClas
   const quantity = context.quantity;
   const [delayProduct, setDelayProduct] = useState(true);
 
-  
+  Get();
 
   useEffect(() => {
     if (data === undefined) {
@@ -113,23 +117,13 @@ const TopCollection =  ({ type, title, subtitle, designClass, noSlider, cartClas
                   </div>
                 ) : (
                   <Slider {...productSlider} className="product-m no-arrow">
-                  {data &&
-                    data.collections.edges.map((collection, i) => (
-                      <div key={i}>
-                        {/* Access the 'node' property of each collection */}
-                        <ProductItems
-                          product={collection.node}
-                          title={title}
-                          addWishlist={() => contextWishlist.addToWish(collection.node)}
-                          addCart={() => context.addToCart(collection.node, quantity)}
-                          addCompare={() => comapreList.addToCompare(collection.node)}
-                          cartClass={cartClass}
-                          backImage={backImage}
-                        />
-                      </div>
-                    ))}
-                </Slider>
-                
+                    {data &&
+                      data.edge.map((product, i) => (
+                        <div key={i}>
+                          <ProductItems product={product} title={title} addWishlist={() => contextWishlist.addToWish(product)} addCart={() => context.addToCart(product, quantity)} addCompare={() => comapreList.addToCompare(product)} cartClass={cartClass} backImage={backImage} />
+                        </div>
+                      ))}
+                  </Slider>
                 )}
               </Col>
             </Row>
