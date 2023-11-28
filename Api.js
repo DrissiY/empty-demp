@@ -1,5 +1,5 @@
 export async function shopifyFetch({ query, variables }) {
-    const endpoint = 'ethnibeautymarket.com';
+    const endpoint = 'https://www.ethnibeautymarket.com/';
     const key = 'c1ea70fefe6a589b91e2e85500c058e3';
   
     try {
