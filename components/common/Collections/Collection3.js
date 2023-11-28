@@ -9,8 +9,9 @@ import { WishlistContext } from "../../../helpers/wishlist/WishlistContext";
 import PostLoader from "../PostLoader";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
 import search from "../../../public/assets/images/empty-search.jpg";
-import {shopifyFetch} from "../../../Api";
+import {shopifyFetch, Getcollections} from "../../../Api";
 import { RECOMMENDED_PRODUCTS_QUERY } from "../../../queries";
+
 
 
 
@@ -47,22 +48,19 @@ const GET_PRODUCTS = gql`
   }
 `;
 
+let data  = await Getcollections();
+
+  console.log(data);
 
 
-const TopCollection = ({ type, title, subtitle, designClass, noSlider, cartClass, productSlider, titleClass, noTitle, innerClass, inner, backImage }) => {
+const TopCollection =  ({ type, title, subtitle, designClass, noSlider, cartClass, productSlider, titleClass, noTitle, innerClass, inner, backImage }) => {
   const context = useContext(CartContext);
   const contextWishlist = useContext(WishlistContext);
   const comapreList = useContext(CompareContext);
   const quantity = context.quantity;
   const [delayProduct, setDelayProduct] = useState(true);
 
-  var { loading, data } = shopifyFetch(RECOMMENDED_PRODUCTS_QUERY, {
-    variables: {
-      type: type,
-      indexFrom: 0,
-      limit: 8,
-    },
-  });
+  
 
   useEffect(() => {
     if (data === undefined) {
@@ -115,13 +113,23 @@ const TopCollection = ({ type, title, subtitle, designClass, noSlider, cartClass
                   </div>
                 ) : (
                   <Slider {...productSlider} className="product-m no-arrow">
-                    {data &&
-                      data.products.items.map((product, i) => (
-                        <div key={i}>
-                          <ProductItems product={product} title={title} addWishlist={() => contextWishlist.addToWish(product)} addCart={() => context.addToCart(product, quantity)} addCompare={() => comapreList.addToCompare(product)} cartClass={cartClass} backImage={backImage} />
-                        </div>
-                      ))}
-                  </Slider>
+                  {data &&
+                    data.collections.edges.map((collection, i) => (
+                      <div key={i}>
+                        {/* Access the 'node' property of each collection */}
+                        <ProductItems
+                          product={collection.node}
+                          title={title}
+                          addWishlist={() => contextWishlist.addToWish(collection.node)}
+                          addCart={() => context.addToCart(collection.node, quantity)}
+                          addCompare={() => comapreList.addToCompare(collection.node)}
+                          cartClass={cartClass}
+                          backImage={backImage}
+                        />
+                      </div>
+                    ))}
+                </Slider>
+                
                 )}
               </Col>
             </Row>
