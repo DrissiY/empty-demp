@@ -74,8 +74,22 @@ const TopCollection = ({
   const comapreList = useContext(CompareContext);
   const quantity = context.quantity;
   const [delayProduct, setDelayProduct] = useState(true);
-  useFetchedData();
-  console.log("shopsata", products);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // Call the fetchData function when the component mounts
+    async function getProducts() {
+      try {
+        const fetchedProducts = await fetchData();
+        setProducts(fetchedProducts); // Set the products in the component state
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        // Handle errors if needed
+      }
+    }
+
+    getProducts();
+  }, []);
   var { loading } = shopifyFetch(RECOMMENDED_PRODUCTS_QUERY, {
     variables: {
       type: type,

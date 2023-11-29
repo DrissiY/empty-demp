@@ -39,13 +39,13 @@ const Jewellery = () => {
           inner="title-inner1"
           hrClass={true}
         />
-        {/* <TopCollection
+        <TopCollection
           type="jewellery"
           designClass="p-t-0 j-box ratio_square"
           productSlider={Product4}
           noSlider="true"
           cartClass="cart-info cart-wrap"
-        /> */}
+        />
         <ProductList />
         <Service layoutClass="section-b-space" />
         <MasterParallaxBanner
