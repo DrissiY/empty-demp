@@ -10,7 +10,7 @@ import PostLoader from "../PostLoader";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
 import search from "../../../public/assets/images/empty-search.jpg";
 import { shopifyFetch } from "../../../Api";
-import { RECOMMENDED_PRODUCTS_QUERY } from "../../../queries";
+import { RECOMMENDED_PRODUCTS_QUERY } from "../../../config/queries";
 import { fetchData } from "../../../config/data/fetchin";
 const GET_PRODUCTS = gql`
   query products($type: _CategoryType!, $indexFrom: Int!, $limit: Int!) {
@@ -44,6 +44,7 @@ const GET_PRODUCTS = gql`
     }
   }
 `;
+import { query } from "../../../config/queries";
 let products;
 async function useFetchedData() {
   try {
@@ -80,7 +81,7 @@ const TopCollection = ({
     // Call the fetchData function when the component mounts
     async function getProducts() {
       try {
-        const fetchedProducts = await fetchData();
+        const fetchedProducts = await fetchData(query);
         setProducts(fetchedProducts); // Set the products in the component state
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -98,7 +99,6 @@ const TopCollection = ({
     },
   });
   var data = products;
-  console.log(products);
 
   useEffect(() => {
     if (data === undefined) {

@@ -26,7 +26,6 @@ const ProductItem = ({
   const minusQty = cartContext.minusQty;
   const quantity = cartContext.quantity;
   const setQuantity = cartContext.setQuantity;
-  console.log("cur context", curContext);
 
   const [image, setImage] = useState("");
   const [modal, setModal] = useState(false);
@@ -144,20 +143,20 @@ const ProductItem = ({
             </ModalBody>
           </Modal>
         </div>
-        {/* {product.images ? (
+        {product.images ? (
           <ul className="product-thumb-list">
-            {product.images.edges.node.transformedSrc.map((img, i) => (
+            {product.images.edges.map((img, i) => (
               <li
                 className={`grid_thumb_img ${
-                  img.src === image ? "active" : ""
+                  img.node.transformedSrc === image ? "active" : ""
                 }`}
                 key={i}
               >
                 <a href={null} title="Add to Wishlist">
                   <Media
-                    src={`${img.src}`}
+                    src={`${img.node.transformedSrc}`}
                     alt="wishlist"
-                    onClick={() => onClickHandle(img.src)}
+                    onClick={() => onClickHandle(img.node.transformedSrc)}
                   />
                 </a>
               </li>
@@ -165,7 +164,7 @@ const ProductItem = ({
           </ul>
         ) : (
           ""
-        )} */}
+        )}
       </div>
       <MasterProductDetail
         product={product}
@@ -234,7 +233,8 @@ const ProductItem = ({
                                   onClick={() =>
                                     variantChangeByColor(
                                       vari.image_id,
-                                      product.images
+                                      product.images.edges[0].node
+                                        .transformedSrc.src
                                     )
                                   }
                                 ></li>

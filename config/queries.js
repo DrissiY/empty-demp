@@ -1,5 +1,40 @@
 // In this file, we will defind most and custom queries
 
+export const query = {
+  query: `
+  {
+
+    products(first: 10) {
+      edges {
+        node {
+          description
+          featuredImage {
+            transformedSrc(preferredContentType: WEBP)
+          }
+          id
+          images(first: 10) {
+            edges {
+              node {
+                transformedSrc(preferredContentType: WEBP)
+              }
+            }
+          }
+          title
+          tags
+          priceRange {
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+        }
+      }
+    }
+    }
+    
+  `,
+};
+
 // FEATURED_COLLECTION_QUERY
 export const FEATURED_COLLECTION_QUERY = `#graphql
 fragment FeaturedCollection on Collection {
@@ -22,7 +57,7 @@ query FeaturedCollection($country: CountryCode, $language: LanguageCode)
     }
   }
 }
-`  ;
+`;
 export const RECOMMENDED_PRODUCTS_QUERY = `#graphql
 fragment RecommendedProduct on Product {
   id
@@ -71,7 +106,7 @@ customerCreate(input: $input) {
   }
 }
 }
-` ;
+`;
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/mutations/customeraccesstokencreate
 export const REGISTER_LOGIN_MUTATION = `#graphql
@@ -92,7 +127,7 @@ customerAccessTokenCreate(input: $input) {
   }
 }
 }
-` ;
+`;
 
 export const SITEMAP_QUERY = `#graphql
   query Sitemap($urlLimits: Int, $language: LanguageCode)
@@ -151,7 +186,7 @@ export const CUSTOMER_ACTIVATE_MUTATION = `#graphql
       }
     }
   }
-` ;
+`;
 // NOTE: https://shopify.dev/docs/api/storefront/latest/mutations/customeraccesstokencreate
 export const LOGIN_MUTATION = `#graphql
   mutation login($input: CustomerAccessTokenCreateInput!) {
@@ -183,7 +218,7 @@ export const CUSTOMER_RECOVER_MUTATION = `#graphql
       }
     }
   }
-` ;
+`;
 export // NOTE: https://shopify.dev/docs/api/storefront/latest/mutations/customerreset
 const CUSTOMER_RESET_MUTATION = `#graphql
   mutation customerReset(
@@ -248,7 +283,7 @@ export const DELETE_ADDRESS_MUTATION = `#graphql
       deletedCustomerAddressId
     }
   }
-` ;
+`;
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/mutations/customerdefaultaddressupdate
 export const UPDATE_DEFAULT_ADDRESS_MUTATION = `#graphql
@@ -274,7 +309,7 @@ export const UPDATE_DEFAULT_ADDRESS_MUTATION = `#graphql
       }
     }
   }
-`  ;
+`;
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/mutations/customeraddresscreate
 export const CREATE_ADDRESS_MUTATION = `#graphql
@@ -298,7 +333,7 @@ export const CREATE_ADDRESS_MUTATION = `#graphql
       }
     }
   }
-`  ;
+`;
 export const ORDER_ITEM_FRAGMENT = `#graphql
   fragment OrderItem on Order {
     currentTotalPrice {
@@ -326,7 +361,7 @@ export const ORDER_ITEM_FRAGMENT = `#graphql
     statusUrl
     processedAt
   }
-`  ;
+`;
 
 export const CUSTOMER_FRAGMENT = `#graphql
   fragment CustomerOrders on Customer {
@@ -351,7 +386,7 @@ export const CUSTOMER_FRAGMENT = `#graphql
     }
   }
   ${ORDER_ITEM_FRAGMENT}
-`  ;
+`;
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/queries/customer
 export const CUSTOMER_ORDERS_QUERY = `#graphql
@@ -369,7 +404,7 @@ export const CUSTOMER_ORDERS_QUERY = `#graphql
       ...CustomerOrders
     }
   }
-`  ;
+`;
 // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/Order
 export const CUSTOMER_ORDER_QUERY = `#graphql
   fragment OrderMoney on MoneyV2 {
@@ -484,7 +519,7 @@ export const CUSTOMER_ORDER_QUERY = `#graphql
       }
     }
   }
-`  ;
+`;
 export const CUSTOMER_UPDATE_MUTATION = `#graphql
   # https://shopify.dev/docs/api/storefront/latest/mutations/customerUpdate
   mutation customerUpdate(
@@ -513,7 +548,7 @@ export const CUSTOMER_UPDATE_MUTATION = `#graphql
       }
     }
   }
-`  ;
+`;
 export const CUSTOMER_FRAGMENT_2 = `#graphql
   fragment Customer on Customer {
     acceptsMarketing
@@ -545,7 +580,7 @@ export const CUSTOMER_FRAGMENT_2 = `#graphql
     zip
     phone
   }
-`  ;
+`;
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/queries/customer
 export const CUSTOMER_QUERY = `#graphql
@@ -559,7 +594,7 @@ export const CUSTOMER_QUERY = `#graphql
     }
   }
   ${CUSTOMER_FRAGMENT_2}
-`  ;
+`;
 export const PREDICTIVE_SEARCH_QUERY = `#graphql
   fragment PredictiveArticle on Article {
     __typename
@@ -653,7 +688,7 @@ export const PREDICTIVE_SEARCH_QUERY = `#graphql
       }
     }
   }
-`  ;
+`;
 // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/blog
 export const BLOGS_QUERY = `#graphql
   query Blogs(
@@ -686,7 +721,7 @@ export const BLOGS_QUERY = `#graphql
       }
     }
   }
-`  ;
+`;
 // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/blog
 export const BLOGS_QUERY_2 = `#graphql
   query Blog(
@@ -743,7 +778,7 @@ export const BLOGS_QUERY_2 = `#graphql
       handle
     }
   }
-`  ;
+`;
 // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/blog#field-blog-articlebyhandle
 export const ARTICLE_QUERY = `#graphql
   query Article(
@@ -774,7 +809,7 @@ export const ARTICLE_QUERY = `#graphql
       }
     }
   }
-`  ;
+`;
 export const COLLECTIONS_QUERY = `#graphql
   fragment Collection on Collection {
     id
@@ -813,7 +848,7 @@ export const COLLECTIONS_QUERY = `#graphql
       }
     }
   }
-`  ;
+`;
 export const PRODUCT_ITEM_FRAGMENT = `#graphql
   fragment MoneyProductItem on MoneyV2 {
     amount
@@ -847,7 +882,7 @@ export const PRODUCT_ITEM_FRAGMENT = `#graphql
       }
     }
   }
-`  ;
+`;
 
 // NOTE: https://shopify.dev/docs/api/storefront/2022-04/objects/collection
 export const COLLECTION_QUERY_2 = `#graphql
@@ -884,7 +919,7 @@ export const COLLECTION_QUERY_2 = `#graphql
       }
     }
   }
-`  ;
+`;
 export const PAGE_QUERY = `#graphql
 query Page(
   $language: LanguageCode,
@@ -902,7 +937,7 @@ query Page(
     }
   }
 }
-`  ;
+`;
 export const POLICIES_QUERY = `#graphql
 fragment PolicyItem on ShopPolicy {
   id
@@ -931,7 +966,7 @@ query Policies ($country: CountryCode, $language: LanguageCode)
     }
   }
 }
-`  ;
+`;
 export // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/Shop
 const POLICY_CONTENT_QUERY = `#graphql
   fragment Policy on ShopPolicy {
@@ -964,7 +999,7 @@ const POLICY_CONTENT_QUERY = `#graphql
       }
     }
   }
-`  ;
+`;
 
 export const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {
@@ -1001,7 +1036,7 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
       currencyCode
     }
   }
-`  ;
+`;
 
 export const PRODUCT_FRAGMENT = `#graphql
   fragment Product on Product {
@@ -1029,7 +1064,7 @@ export const PRODUCT_FRAGMENT = `#graphql
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}
-`  ;
+`;
 
 export const PRODUCT_QUERY = `#graphql
   query Product(
@@ -1043,7 +1078,7 @@ export const PRODUCT_QUERY = `#graphql
     }
   }
   ${PRODUCT_FRAGMENT}
-`  ;
+`;
 
 export const PRODUCT_VARIANTS_FRAGMENT = `#graphql
   fragment ProductVariants on Product {
@@ -1054,7 +1089,7 @@ export const PRODUCT_VARIANTS_FRAGMENT = `#graphql
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}
-`  ;
+`;
 
 export const VARIANTS_QUERY = `#graphql
   ${PRODUCT_VARIANTS_FRAGMENT}
@@ -1067,7 +1102,7 @@ export const VARIANTS_QUERY = `#graphql
       ...ProductVariants
     }
   }
-`  ;
+`;
 export const SEARCH_QUERY = `#graphql
 fragment SearchProduct on Product {
   __typename
@@ -1173,7 +1208,7 @@ query search(
     }
   }
 }
-`  ;
+`;
 export const ROBOTS_QUERY = `#graphql
   query StoreRobots($country: CountryCode, $language: LanguageCode)
    @inContext(country: $country, language: $language) {
@@ -1181,7 +1216,7 @@ export const ROBOTS_QUERY = `#graphql
       id
     }
   }
-`  ;
+`;
 export const MENU_FRAGMENT = `#graphql
   fragment MenuItem on MenuItem {
     id
@@ -1206,7 +1241,7 @@ export const MENU_FRAGMENT = `#graphql
       ...ParentMenuItem
     }
   }
-`  ;
+`;
 
 export const HEADER_QUERY = `#graphql
   fragment Shop on Shop {
@@ -1237,7 +1272,7 @@ export const HEADER_QUERY = `#graphql
     }
   }
   ${MENU_FRAGMENT}
-`  ;
+`;
 
 export const FOOTER_QUERY = `#graphql
   query Footer(
@@ -1250,4 +1285,4 @@ export const FOOTER_QUERY = `#graphql
     }
   }
   ${MENU_FRAGMENT}
-`  ;
+`;
