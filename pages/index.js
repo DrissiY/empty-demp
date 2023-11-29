@@ -30,7 +30,7 @@ const Jewellery = () => {
         />
       </Helmet>
       <div className="bg_cls">
-        <ModalComponent />
+        {/* <ModalComponent /> */}
         <HeaderSeven logoName={"logo/13.png"} />
         <Banner />
         <Category />
@@ -46,7 +46,7 @@ const Jewellery = () => {
           noSlider="true"
           cartClass="cart-info cart-wrap"
         />
-        <ProductList />
+        {/* <ProductList /> */}
         <Service layoutClass="section-b-space" />
         <MasterParallaxBanner
           bg="parallax-banner18"

@@ -26,6 +26,7 @@ const ProductItem = ({
   const minusQty = cartContext.minusQty;
   const quantity = cartContext.quantity;
   const setQuantity = cartContext.setQuantity;
+  console.log("cur context", curContext);
 
   const [image, setImage] = useState("");
   const [modal, setModal] = useState(false);

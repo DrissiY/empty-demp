@@ -22,6 +22,12 @@ async function fetchData() {
               }
               title
               tags
+              priceRange {
+                maxVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
             }
           }
         }
@@ -30,12 +36,12 @@ async function fetchData() {
       `,
     };
     const response = await axios.post(
-      "https://ethni01.myshopify.com/api/2023-10/graphql.json",
+      "https://ethnibeautymarket.com/api/2023-10/graphql.json",
       query,
       {
         headers: {
           "X-Shopify-Storefront-Access-Token":
-            "f3a10d22bc94caeb6bddb5e034282485",
+            "c1ea70fefe6a589b91e2e85500c058e3",
           "Content-Type": "application/json",
         },
       }
