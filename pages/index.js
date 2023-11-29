@@ -12,18 +12,22 @@ import { Product4 } from "../services/script";
 import Service from "../components/common/Service/service3";
 import MasterParallaxBanner from "./layouts/Jewellery/Component/MasterParallaxBanner";
 import FooterFive from "../components/footers/footer-five";
-
+import ProductList from "../components/productspage";
 
 const Jewellery = () => {
   useEffect(() => {
     document.documentElement.style.setProperty("--theme-deafult", "#5fcbc4");
   });
-  
+
   return (
     <Fragment>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/x-icon" href={"/assets/images/favicon/16.png"} />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href={"/assets/images/favicon/16.png"}
+        />
       </Helmet>
       <div className="bg_cls">
         <ModalComponent />
@@ -35,13 +39,14 @@ const Jewellery = () => {
           inner="title-inner1"
           hrClass={true}
         />
-        <TopCollection
+        {/* <TopCollection
           type="jewellery"
           designClass="p-t-0 j-box ratio_square"
           productSlider={Product4}
           noSlider="true"
           cartClass="cart-info cart-wrap"
-        />
+        /> */}
+        <ProductList />
         <Service layoutClass="section-b-space" />
         <MasterParallaxBanner
           bg="parallax-banner18"

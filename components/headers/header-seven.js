@@ -85,7 +85,8 @@ const HeaderSeven = ({ logoName }) => {
                             />
                             <i
                               className="fa fa-search"
-                              onClick={openSearch}></i>
+                              onClick={openSearch}
+                            ></i>
                           </div>
                         </li>
                         <Currency icon={settings.src} />

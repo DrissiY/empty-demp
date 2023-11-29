@@ -85,8 +85,6 @@ const LeftSidebarPage = ({ pathId }) => {
     slider2.current?.slickGoTo(img_id);
   };
 
-  console.log("data.product.images", data?.product?.images?.length);
-
   return (
     <section className="">
       <div className="collection-wrapper">
@@ -105,17 +103,26 @@ const LeftSidebarPage = ({ pathId }) => {
                   <Col xl="12" className="filter-col">
                     <div className="filter-main-btn mb-2">
                       <span onClick={filterClick} className="filter-btn">
-                        <i className="fa fa-filter" aria-hidden="true"></i> filter
+                        <i className="fa fa-filter" aria-hidden="true"></i>{" "}
+                        filter
                       </span>
                     </div>
                   </Col>
                 </Row>
-                {!data || !data.product || data.product.length === 0 || loading ? (
+                {!data ||
+                !data.product ||
+                data.product.length === 0 ||
+                loading ? (
                   "loading"
                 ) : (
                   <Row>
                     <Col lg="6" className="product-thumbnail">
-                      <Slider {...products} asNavFor={nav2} ref={(slider) => setSlider1(slider)} className="product-slick">
+                      <Slider
+                        {...products}
+                        asNavFor={nav2}
+                        ref={(slider) => setSlider1(slider)}
+                        className="product-slick"
+                      >
                         {data.product.images.map((vari, index) => (
                           <div key={index}>
                             <ImageZoom image={vari} />
@@ -123,17 +130,30 @@ const LeftSidebarPage = ({ pathId }) => {
                         ))}
                       </Slider>
                       {data.product.variants.length > 1 && (
-                        <Slider className="slider-nav" {...sliderNav} asNavFor={nav1} ref={(slider) => setSlider2(slider)}>
+                        <Slider
+                          className="slider-nav"
+                          {...sliderNav}
+                          asNavFor={nav1}
+                          ref={(slider) => setSlider2(slider)}
+                        >
                           {data.product.images.map((item, i) => (
                             <div key={i}>
-                              <Media src={item.src} key={i} alt={item.alt} className="img-fluid" />
+                              <Media
+                                src={item.src}
+                                key={i}
+                                alt={item.alt}
+                                className="img-fluid"
+                              />
                             </div>
                           ))}
                         </Slider>
                       )}
                     </Col>
                     <Col lg="6" className="rtl-text product-ps">
-                      <DetailsWithPrice item={data.product} changeColorVar={changeColorVar} />
+                      <DetailsWithPrice
+                        item={data.product}
+                        changeColorVar={changeColorVar}
+                      />
                     </Col>
                   </Row>
                 )}
