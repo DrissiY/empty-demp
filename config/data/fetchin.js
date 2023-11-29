@@ -6,14 +6,25 @@ async function fetchData() {
       {
 
         products(first: 10) {
-             edges {
-               node {
-                 id
-                 title
-                 description
-               }
-             }
-           }
+          edges {
+            node {
+              description
+              featuredImage {
+                transformedSrc(preferredContentType: WEBP)
+              }
+              id
+              images(first: 10) {
+                edges {
+                  node {
+                    transformedSrc(preferredContentType: WEBP)
+                  }
+                }
+              }
+              title
+              tags
+            }
+          }
+        }
         }
         
       `,

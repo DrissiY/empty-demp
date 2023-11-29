@@ -98,6 +98,7 @@ const TopCollection = ({
     },
   });
   var data = products;
+  console.log(products);
 
   useEffect(() => {
     if (data === undefined) {
@@ -150,22 +151,19 @@ const TopCollection = ({
                   </div>
                 ) : (
                   <Slider {...productSlider} className="product-m no-arrow">
-                    {data &&
-                      data.products.items.map((product, i) => (
-                        <div key={i}>
-                          <ProductItems
-                            product={product}
-                            title={title}
-                            addWishlist={() =>
-                              contextWishlist.addToWish(product)
-                            }
-                            addCart={() => context.addToCart(product, quantity)}
-                            addCompare={() => comapreList.addToCompare(product)}
-                            cartClass={cartClass}
-                            backImage={backImage}
-                          />
-                        </div>
-                      ))}
+                    {products.map((product, i) => (
+                      <div key={i}>
+                        <ProductItems
+                          product={product}
+                          title={title}
+                          addWishlist={() => contextWishlist.addToWish(product)}
+                          addCart={() => context.addToCart(product, quantity)}
+                          addCompare={() => comapreList.addToCompare(product)}
+                          cartClass={cartClass}
+                          backImage={backImage}
+                        />
+                      </div>
+                    ))}
                   </Slider>
                 )}
               </Col>
